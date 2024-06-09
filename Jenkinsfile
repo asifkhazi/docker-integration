@@ -31,7 +31,7 @@ pipeline {
     		}*/
 		stage ('docker') {
 			agent {
-				any {
+				docker {
 					image 'asifkhazi/tomcatjar'
 					args '-p 8080:8080'
 				}
