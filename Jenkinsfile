@@ -11,6 +11,7 @@ pipeline {
 			agent { label 'master' }
 			steps {
 				git branch:'main', url:'https://github.com/asifkhazi/docker-integration.git'
+				sh 'docker --version'
 			}
 		}
 		/*stage('SonarQube analysis') {
@@ -28,15 +29,5 @@ pipeline {
         			}
      			 }
     		}*/
-		stage ('docker') {
-			agent {
-				docker {
-					image 'asifkhazi/tomcatjar'
-				}
-			}
-			steps {
-				sh 'ls /usr/local/tomcat/webapps/'
-			}
-		}
 	}
 }
