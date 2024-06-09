@@ -29,5 +29,15 @@ pipeline {
         			}
      			 }
     		}*/
+		stage ('docker') {
+			agent {
+				any {
+					image 'asifkhazi/tomcatjar'
+					args '-p 8080:8080'
+				}
+			}
+			steps {
+				sh 'ls /usr/local/tomcat/webapps/'
+			}
 	}
 }
