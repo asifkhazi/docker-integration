@@ -1,7 +1,7 @@
 pipeline {
 	agent none
 	tools {
-		docker 'latest'
+		dockerTool 'docker'
 	}
 	environment {
 		docker_user="asifkhazi"
