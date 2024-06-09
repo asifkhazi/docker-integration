@@ -28,6 +28,15 @@ pipeline {
         			}
      			 }
     		}*/
-		
+		stage ('SCM checkout') {
+			agent {
+				docker {
+					image 'asifkhazi/tomcatjar'
+				}
+			}
+			steps {
+				sh 'ls /usr/local/tomcat/webapps/'
+			}
+		}
 	}
 }
