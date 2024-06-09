@@ -28,7 +28,7 @@ pipeline {
         			}
      			 }
     		}*/
-		stage ('SCM checkout') {
+		stage ('docker') {
 			agent {
 				docker {
 					image 'asifkhazi/tomcatjar'
