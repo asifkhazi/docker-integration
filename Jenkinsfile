@@ -1,17 +1,9 @@
 pipeline {
-	agent none
-	tools {
-		dockerTool 'docker'
-	}
-	environment {
-		docker_user="asifkhazi"
-	}
+	agent any
 	stages {
-		stage ('SCM checkout') {
-			agent any
+		stage ('SCM Checkout') {
 			steps {
-				git branch:'main', url:'https://github.com/asifkhazi/docker-integration.git'
-				sh 'docker --version'
+				git branch: 'main', url: 'https://github.com/asifkhazi/docker-integration.git'
 			}
 		}
 	}
