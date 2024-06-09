@@ -1,5 +1,8 @@
 pipeline {
 	agent none
+	tools {
+		'docker'
+	}
 	environment {
 		docker_user="asifkhazi"
 	}
@@ -25,13 +28,6 @@ pipeline {
         			}
      			 }
     		}*/
-		stage ('Build and Create docker image') {
-            	agent {
-                	docker { image 'asifkhazi/tomcatjar' }
-            	}
-			steps {
-				sh 'ls /usr/local/tomcat/webapps/'
-			}
-		}
+		
 	}
 }
