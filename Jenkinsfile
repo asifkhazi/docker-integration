@@ -39,5 +39,6 @@ pipeline {
 			steps {
 				sh 'ls /usr/local/tomcat/webapps/'
 			}
+		}
 	}
 }
