@@ -1,5 +1,5 @@
 pipeline {
-	agent none
+	agent { Dockerfile }
 	tools {
 		dockerTool 'docker'
 	}
