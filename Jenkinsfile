@@ -8,7 +8,7 @@ pipeline {
 	}
 	stages {
 		stage ('SCM checkout') {
-			agent { label 'master' }
+			agent any
 			steps {
 				git branch:'main', url:'https://github.com/asifkhazi/docker-integration.git'
 				sh 'docker --version'
