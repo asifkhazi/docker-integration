@@ -1,10 +1,11 @@
 pipeline {
-	agent any
+	agent none
 	environment {
 		docker_user="asifkhazi"
 	}
 	stages {
 		stage ('SCM checkout') {
+			agent { label 'master' }
 			steps {
 				git branch:'main', url:'https://github.com/asifkhazi/docker-integration.git'
 			}
@@ -25,11 +26,11 @@ pipeline {
      			 }
     		}*/
 		stage ('Build and Create docker image') {
-            agent {
-                label 'docker'
-            }
+            	agent {
+                	docker { image 'asifkhazi/tomcatjar' }
+            	}
 			steps {
-				sh 'docker build -t ${docker_user}/docker:${BUILD_ID} -f Dockerfile .'
+				sh 'ls /usr/local/tomcat/webapps/'
 			}
 		}
 	}
