@@ -1,7 +1,7 @@
 pipeline {
   agent any
   tools {
-    toolType 'SonarQubeScanner'
+    sonar-scanner 'SonarQubeScanner'
   }
   stages {
     stage ('SCM Checkout') {
