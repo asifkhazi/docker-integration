@@ -17,5 +17,14 @@ pipeline {
         sh 'mvn clean install'
       }
     }
+    stage ('SonarQube Analysis') {
+      steps {
+        withSonarQubeEnv('SonarQubeServer') {
+					sh '''${SCANNER_HOME}/bin/SonarQubeScanner \
+              -Dsonar.projectKey=docker-integration \
+  						-Dsonar.projectName=docker-integration'''
+        }
+      }
+    }
   }
 }
