@@ -1,7 +1,7 @@
 pipeline {
   agent any
-  tools {
-    sonar-scanner 'SonarQubeScanner'
+  environment {
+    SCANNER-HOME= tool 'SonarQubeScanner'
   }
   stages {
     stage ('SCM Checkout') {
