@@ -10,5 +10,15 @@ pipeline {
 				git branch: 'master', url: 'https://github.com/asifkhazi/docker-integration.git' 
 			}
 		}
+		stage ('Build') {
+			steps {
+				sh 'sudo apt-get update && sudo apt-get install apach2 -y'
+			}
+		}
+		stage ('Deploy') {
+			steps {
+				sh 'echo "This is index.html page">> /var/www/html/index.html' 
+			}
+		}
 	}
 }
