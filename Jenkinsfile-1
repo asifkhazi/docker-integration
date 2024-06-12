@@ -1,8 +1,7 @@
 pipeline {
 	agent {
 		docker {
-			image: 'ubuntu'
-			registry: 'https://registry.hub.docker.com'
+			image 'ubuntu'
 		}
 	}
 	stages {
