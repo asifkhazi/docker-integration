@@ -12,12 +12,12 @@ pipeline {
 		}
 		stage ('Build') {
 			steps {
-				sh 'apt-get update && apt-get install apach2 -y'
+				sh 'echo "This is index.html page" >> sam.txt'
 			}
 		}
 		stage ('Deploy') {
 			steps {
-				sh 'echo "This is index.html page">> /var/www/html/index.html' 
+				sh 'cat sam.txt' 
 			}
 		}
 	}
