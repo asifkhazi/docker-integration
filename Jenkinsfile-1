@@ -1,0 +1,63 @@
+pipeline {
+	agent none
+	tools {
+		maven 'maven3'
+	}
+	environment {
+		SCANNER_HOME= tool 'SonarQubeScanner'
+    Docker= tool 'docker'
+    docker_cred=credentials('docker_cred')
+	}
+	stages {
+		stage ('SCM Checkout') {
+			steps {
+				git branch: 'master', url: 'https://github.com/asifkhazi/docker-integration.git'
+			}
+		}
+
+		stage ('Build') {
+			steps {
+				sh 'mvn clean install'
+			}
+		}
+
+		/*stage ('SnarQube Analysis') {
+			steps {
+				withSonarQubeEnv ('SonarQubeServer') {
+					sh '''${SCANNER_HOME}/bin/sonar-scanner \
+					-Dsonar.projectName=docker-integration \
+					-Dsonar.projectKey=docker-integration'''
+				}
+			}
+		}
+
+		stage ('Quality Gates') {
+			steps {
+				timeout (time: 2, unit: 'MINUTES') {
+					waitForQualityGate abortPipeline: true
+				}
+			}
+		}*/
+		stage ('Image Build') {
+			steps {
+				sh 'docker build -t ${docker_cred_USR}/pipeline:v1.${BUILD_NUMBER} .'
+				sh 'docker tag ${docker_cred_USR}/pipeline:v1.${BUILD_NUMBER} ${docker_cred_USR}/pipeline:latest'
+			}
+		}
+
+		stage ('Push to Artifactory') {
+			steps {
+				sh 'docker login -u ${docker_cred_USR} -p ${docker_cred_PSW}'
+				sh 'docker push ${docker_cred_USR}/pipeline:v1.${BUILD_NUMBER}'
+				sh 'docker push ${docker_cred_USR}/pipeline:latest'
+			}
+		}
+		/*stage ('Deploy) {
+			steps {
+				sh 'kubectl apply -f Deploy.yaml'
+				sh 'kubectl apply -f Service.yaml'
+			}
+		}*/
+				
+	}
+}
