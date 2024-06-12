@@ -20,9 +20,9 @@ pipeline {
     stage ('SonarQube Analysis') {
       steps {
         withSonarQubeEnv('SonarQubeServer') {
-					sh '''${SCANNER_HOME}/bin/SonarQubeScanner \
-              -Dsonar.projectKey=docker-integration \
-  						-Dsonar.projectName=docker-integration'''
+		sh '''${SCANNER_HOME}/bin/sonar-canner \
+              		-Dsonar.projectKey=docker-integration \
+  			-Dsonar.projectName=docker-integration'''
         }
       }
     }
