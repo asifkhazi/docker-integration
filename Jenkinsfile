@@ -6,7 +6,7 @@ pipeline {
   stages {
     stage ('SCM Checkout') {
       steps {
-        git branch: master, url: 'https://github.com/asifkhazi/docker-integration.git'
+        git branch: 'master', url: 'https://github.com/asifkhazi/docker-integration.git'
       }
     }
   }
